@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XRedditReaderV4.MainPage">
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:view="clr-namespace:XRedditReaderV4.View;assembly=XRedditReaderV4" 
+	xmlns:fe="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+	x:Class="XRedditReaderV4.MainPage">
+	
 	<ContentPage.Content>
 		<StackLayout>
+			<fe:BindablePicker HeightRequest="50" TextColor="#afafaf" ItemsSource="{Binding PostTypes}" SelectedItem="{Binding SelectedPostType}" Title="Select..." />
 			<Button Text="Carrega Posts" Command = "{Binding LoadDirectoryCommand}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 			<ListView x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="70" Margin="10,10" >

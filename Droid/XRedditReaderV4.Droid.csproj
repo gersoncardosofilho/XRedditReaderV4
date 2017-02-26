@@ -104,6 +104,12 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.3.193\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="FreshEssentials">
+      <HintPath>..\packages\FreshEssentials.2.1.3\lib\MonoAndroid10\FreshEssentials.dll</HintPath>
+    </Reference>
+    <Reference Include="FreshEssentials.Droid">
+      <HintPath>..\packages\FreshEssentials.2.1.3\lib\MonoAndroid10\FreshEssentials.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XRedditReaderV4\XRedditReaderV4.csproj">

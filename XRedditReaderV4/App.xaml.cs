@@ -8,7 +8,12 @@ namespace XRedditReaderV4
 		{
 			InitializeComponent();
 
-			MainPage = new NavigationPage(new MainPage());
+			MainPage = new NavigationPage(new MainPage())
+			{
+				BarBackgroundColor = Color.FromHex("#d38f29"),
+				BarTextColor = Color.White,
+				Title = "Reddit"
+			};
 		}
 
 		protected override void OnStart()
