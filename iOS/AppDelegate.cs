@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FreshEssentials.iOS;
 
 using Foundation;
 using UIKit;
@@ -17,8 +16,7 @@ namespace XRedditReaderV4.iOS
 
 			LoadApplication(new App());
 
-			//Inicializa o Bindable Picker
-			new FreshEssentials.iOS.AdvancedFrameRendereriOS();
+
 
 			return base.FinishedLaunching(app, options);
 		}

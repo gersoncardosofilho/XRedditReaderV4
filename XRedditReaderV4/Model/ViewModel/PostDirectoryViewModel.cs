@@ -2,106 +2,184 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 using Xamarin.Forms;
 
 namespace XRedditReaderV4
 {
 	public class PostDirectoryViewModel : ObservableBaseObject
 	{
-		public ObservableCollection<Post> Posts
-		{	
-			get;
-			set;
-		}
+		private IPostService _dataService;
+		private Post _selectedPost;
+		private RelayCommand _refreshCommand;
+		//private RelayCommand<string> _refreshSelectedPosts;
 
-		public ObservableCollection<string> PostTypes
-		{
-			get;
-		}
+		List<string> countries = new List<string>
+	{
+		"Afghanistan",
+		"Albania",
+		"Algeria",
+		"Andorra",
+		"Angola"
+	};
 
-		private Post selectedPost;
-		public Post SelectedPostType
+		private string selectedCountry;
+		public string SelectedCountry
 		{
 			get
 			{
-				return selectedPost;
+				return selectedCountry;
 			}
+
 			set
 			{
-				if (selectedPost == value)
+				if (selectedCountry == value)
 				{
 					return;
 				}
-				selectedPost = value;
+				selectedCountry = value;
 				OnPropertyChanged();
 			}
 		}
 
-		int index;
-		public int Index
+		public List<string> Countries => countries;
+
+		int countriesSelectedIndex;
+
+		public int CountriesSelectedIndex
 		{
 			get
 			{
-				return index;
+				return countriesSelectedIndex;
 			}
 			set
 			{
-				if (index == value)
+				if (countriesSelectedIndex != value)
 				{
-					return;
+					countriesSelectedIndex = value;
+					OnPropertyChanged();
+					SelectedCountry = Countries[countriesSelectedIndex];
 				}
-				index = value;
-				OnPropertyChanged();
 			}
 		}
 
-		bool isBusy = false;
+		private bool _isBusy = false;
 		public bool IsBusy
 		{
 			get
 			{
-				return isBusy;
+				return _isBusy;
 			}
 			set
 			{
-				if (isBusy == value)
+				if (_isBusy == value)
 				{
 					return;
 				}
-				isBusy = value;
+				_isBusy = value;
 				OnPropertyChanged();
 			}
 		}
 
-		public Command LoadDirectoryCommand
+
+		//construtor
+		public PostDirectoryViewModel(IPostService dataService)
+		{
+			this._dataService = dataService;
+			this.IsBusy = false;
+
+			Posts = new ObservableCollection<Post>();
+
+
+
+		}
+
+
+		public PostDirectoryViewModel() : this((new PostService())) { }
+
+
+		public ObservableCollection<Post> Posts
 		{
 			get;
-			set;
+			private set;
 		}
 
-		public PostDirectoryViewModel()
+		//Post selected to navigate to details page
+		public Post SelectedPost
 		{
-			Posts = new ObservableCollection<Post>();
-			IsBusy = false;
-			LoadDirectoryCommand = new Command((obj) => LoadDirectory());
-			this.PostTypes = new ObservableCollection<string>() { "Hot Posts", "New Posts", "Top Posts", "Controversial Posts", "Rising Posts" };
-		}
-
-		async void LoadDirectory()
-		{
-			if (!IsBusy)
+			get
 			{
-				IsBusy = true;
-
-				await Task.Delay(3000);
-				var loadedPosts = LoadPostDirectory.LoadPostsDirectory();
-				foreach (var post in loadedPosts.Posts)
+				return _selectedPost;
+			}
+			set
+			{
+				if (_selectedPost == value)
 				{
-					Posts.Add(post);
+					return;
 				}
-
-				IsBusy = false;
+				_selectedPost = value;
+				OnPropertyChanged();
 			}
 		}
+
+		public RelayCommand RefreshCommand
+		{
+			get
+			{
+				return _refreshCommand
+					?? (_refreshCommand = new RelayCommand(
+						async () =>
+						{
+							await Refresh();
+						}));
+			}
+		}
+
+		private async Task Refresh()
+		{
+			IsBusy = true;
+
+			Posts.Clear();
+
+			var posts = await _dataService.Refresh();
+
+			foreach (var post in posts)
+			{
+				Posts.Add(post);
+			}
+
+			IsBusy = false;
+		}
+
+		//public RelayCommand<string> GetSelectedPostsCommand
+		//{
+		//	get
+		//	{
+		//		return _refreshSelectedPosts
+		//			?? (_refreshSelectedPosts = new RelayCommand<string>(
+		//				async s =>
+		//				{
+
+		//					await GetSelectedPosts(s);
+
+		//				}));
+		//	}
+		//}
+
+		//async Task GetSelectedPosts(SelectedPostType)
+		//{
+		//	Posts.Clear();
+
+		//	var posts = await _dataService.GetPostsAsync(SelectedPostType);
+
+		//	foreach (var post in posts)
+		//	{
+		//		Posts.Add(post);
+		//	}
+		//}
+
+
+	}
 }
-}
+
+

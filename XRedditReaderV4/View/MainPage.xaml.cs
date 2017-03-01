@@ -14,6 +14,7 @@ namespace XRedditReaderV4
 			lvPosts.ItemSelected += LvPosts_ItemSelected;
 		}
 
+
 		void LvPosts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
 			Post selectedPost = (Post)e.SelectedItem;
