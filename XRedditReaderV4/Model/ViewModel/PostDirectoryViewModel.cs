@@ -121,34 +121,6 @@ namespace XRedditReaderV4
 				OnPropertyChanged();
 			}
 		}
-
-
-
-
-
-
-
-
-		private RelayCommand<object> _selectCommand;
-		public RelayCommand<object> SelectCommand
-		{
-			get
-			{
-				return _selectCommand
-					?? (_selectCommand = new RelayCommand<object>(
-						async() obj =>
-					{
-
-					});
-					
-			}
-
-		}
-
-
-
-
-
 	}
 
 
