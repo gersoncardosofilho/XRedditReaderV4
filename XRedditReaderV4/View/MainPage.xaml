@@ -7,7 +7,7 @@
 	
 	<ContentPage.Content>
 		<StackLayout>
-			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" />
+			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" SelectedIndexChanged="{Binding SelectCommand}" />
 			<Label Text="{Binding SelectedPostType}"/>
 			<Button Text="Carrega Posts" Command = "{Binding GetSelectedPostsCommand}" CommandParameter = "{Binding SelectedPostType}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
