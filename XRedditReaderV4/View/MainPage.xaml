@@ -7,8 +7,8 @@
 	
 	<ContentPage.Content>
 		<StackLayout>
-			<Picker ItemsSource = "{Binding Countries}" SelectedIndex = "{Binding CountriesSelectedIndex}" />
-			<Label Text="{Binding SelectedCountry}"/>
+			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" />
+			<Label Text="{Binding SelectedPostType}"/>
 			<Button Text="Carrega Posts" Command = "{Binding GetSelectedPostsCommand}" CommandParameter = "{Binding SelectedPostType}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 			<ListView x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="70" Margin="10,10" >

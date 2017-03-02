@@ -11,54 +11,54 @@ namespace XRedditReaderV4
 	{
 		private IPostService _dataService;
 		private Post _selectedPost;
-		private RelayCommand _refreshCommand;
-		//private RelayCommand<string> _refreshSelectedPosts;
+		//private RelayCommand _refreshCommand;
+		//private RelayCommand<string> _getSelectedPostsCommand;
 
-		List<string> countries = new List<string>
+		List<string> postTypes = new List<string>
 	{
-		"Afghanistan",
-		"Albania",
-		"Algeria",
-		"Andorra",
-		"Angola"
+		"New",
+		"Hot",
+		"Controversial",
+		"Top",
+		"Rising"
 	};
 
-		private string selectedCountry;
-		public string SelectedCountry
+		private string selectedPostType;
+		public string SelectedPostType
 		{
 			get
 			{
-				return selectedCountry;
+				return selectedPostType;
 			}
 
 			set
 			{
-				if (selectedCountry == value)
+				if (selectedPostType == value)
 				{
 					return;
 				}
-				selectedCountry = value;
+				selectedPostType = value;
 				OnPropertyChanged();
 			}
 		}
 
-		public List<string> Countries => countries;
+		public List<string> PostTypes => postTypes;
 
-		int countriesSelectedIndex;
+		int postTypeSelectedIndex;
 
-		public int CountriesSelectedIndex
+		public int PostTypeSelectedIndex
 		{
 			get
 			{
-				return countriesSelectedIndex;
+				return postTypeSelectedIndex;
 			}
 			set
 			{
-				if (countriesSelectedIndex != value)
+				if (postTypeSelectedIndex != value)
 				{
-					countriesSelectedIndex = value;
+					postTypeSelectedIndex = value;
 					OnPropertyChanged();
-					SelectedCountry = Countries[countriesSelectedIndex];
+					SelectedPostType = PostTypes[postTypeSelectedIndex];
 				}
 			}
 		}
@@ -122,64 +122,93 @@ namespace XRedditReaderV4
 			}
 		}
 
-		public RelayCommand RefreshCommand
+
+
+
+
+
+
+
+		private RelayCommand<object> _selectCommand;
+		public RelayCommand<object> SelectCommand
 		{
 			get
 			{
-				return _refreshCommand
-					?? (_refreshCommand = new RelayCommand(
-						async () =>
-						{
-							await Refresh();
-						}));
-			}
-		}
+				return _selectCommand
+					?? (_selectCommand = new RelayCommand<object>(
+						async() obj =>
+					{
 
-		private async Task Refresh()
-		{
-			IsBusy = true;
-
-			Posts.Clear();
-
-			var posts = await _dataService.Refresh();
-
-			foreach (var post in posts)
-			{
-				Posts.Add(post);
+					});
+					
 			}
 
-			IsBusy = false;
 		}
 
-		//public RelayCommand<string> GetSelectedPostsCommand
-		//{
-		//	get
-		//	{
-		//		return _refreshSelectedPosts
-		//			?? (_refreshSelectedPosts = new RelayCommand<string>(
-		//				async s =>
-		//				{
 
-		//					await GetSelectedPosts(s);
 
-		//				}));
-		//	}
-		//}
-
-		//async Task GetSelectedPosts(SelectedPostType)
-		//{
-		//	Posts.Clear();
-
-		//	var posts = await _dataService.GetPostsAsync(SelectedPostType);
-
-		//	foreach (var post in posts)
-		//	{
-		//		Posts.Add(post);
-		//	}
-		//}
 
 
 	}
+
+
+	//public RelayCommand RefreshCommand
+	//{
+	//	get
+	//	{
+	//		return _refreshCommand
+	//			?? (_refreshCommand = new RelayCommand(
+	//				async () =>
+	//				{
+	//					await Refresh();
+	//				}));
+	//	}
+	//}
+
+	//private async Task Refresh()
+	//{
+	//	IsBusy = true;
+
+	//	Posts.Clear();
+
+	//	var posts = await _dataService.Refresh();
+
+	//	foreach (var post in posts)
+	//	{
+	//		Posts.Add(post);
+	//	}
+
+	//	IsBusy = false;
+	//}
+
+	//public RelayCommand<string> GetSelectedPostsCommand
+	//{
+	//	get
+	//	{
+	//		return _getSelectedPostsCommand
+	//			?? (_getSelectedPostsCommand = new RelayCommand<string>(
+	//				async s =>
+	//				{
+
+	//					await GetSelectedPosts(s);
+
+	//				}));
+	//	}
+	//}
+
+	//async Task GetSelectedPosts(Sele)
+	//{
+	//	Posts.Clear();
+
+	//	var posts = await _dataService.GetPostsAsync(SelectedPostType);
+
+	//	foreach (var post in posts)
+	//	{
+	//		Posts.Add(post);
+	//	}
+	//}
+
 }
+
 
 
