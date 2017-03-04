@@ -7,9 +7,9 @@
 	
 	<ContentPage.Content>
 		<StackLayout>
-			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" SelectedIndexChanged="{Binding SelectCommand}" />
+			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" />
 			<Label Text="{Binding SelectedPostType}"/>
-			<Button Text="Carrega Posts" Command = "{Binding GetSelectedPostsCommand}" CommandParameter = "{Binding SelectedPostType}" />
+			<Button Text="Carrega Posts" Command = "{Binding GetPostsAsyncCommand}" CommandParameter = "{Binding SelectedPostType}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
 			<ListView x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="70" Margin="10,10" >
 				<ListView.ItemTemplate>

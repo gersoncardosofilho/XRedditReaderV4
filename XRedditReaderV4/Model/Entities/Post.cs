@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace XRedditReaderV4
 {
-	public class Post : ObservableBaseObject
+	public class Post : ViewModelBase
 	{
 		private string _thumbnail;
 		private string _url;

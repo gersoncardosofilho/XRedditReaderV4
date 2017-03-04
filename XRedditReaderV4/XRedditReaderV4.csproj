@@ -48,13 +48,13 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ViewModel\PostDirectoryViewModel.cs" />
-    <Compile Include="Model\Entities\ObservableBaseObject.cs" />
     <Compile Include="View\PostDetailPage.xaml.cs">
       <DependentUpon>PostDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Service\IPostService.cs" />
     <Compile Include="Model\Service\PostService.cs" />
     <Compile Include="Model\Service\Constants.cs" />
+    <Compile Include="Model\ViewModel\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation">

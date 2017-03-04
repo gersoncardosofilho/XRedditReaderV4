@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Xamarin.Forms;
 
 namespace XRedditReaderV4
 {
-	public class PostDirectoryViewModel : ObservableBaseObject
+	public class PostDirectoryViewModel : ViewModelBase
 	{
-		private IPostService _dataService;
+
+		#region Properties
+
+		private IPostService dataService;
 		private Post _selectedPost;
-		//private RelayCommand _refreshCommand;
-		//private RelayCommand<string> _getSelectedPostsCommand;
 
 		List<string> postTypes = new List<string>
-	{
-		"New",
-		"Hot",
-		"Controversial",
-		"Top",
-		"Rising"
-	};
+		{
+			"New",
+			"Hot",
+			"Controversial",
+			"Top",
+			"Rising"
+		};
 
 		private string selectedPostType;
 		public string SelectedPostType
@@ -63,41 +65,6 @@ namespace XRedditReaderV4
 			}
 		}
 
-		private bool _isBusy = false;
-		public bool IsBusy
-		{
-			get
-			{
-				return _isBusy;
-			}
-			set
-			{
-				if (_isBusy == value)
-				{
-					return;
-				}
-				_isBusy = value;
-				OnPropertyChanged();
-			}
-		}
-
-
-		//construtor
-		public PostDirectoryViewModel(IPostService dataService)
-		{
-			this._dataService = dataService;
-			this.IsBusy = false;
-
-			Posts = new ObservableCollection<Post>();
-
-
-
-		}
-
-
-		public PostDirectoryViewModel() : this((new PostService())) { }
-
-
 		public ObservableCollection<Post> Posts
 		{
 			get;
@@ -122,92 +89,47 @@ namespace XRedditReaderV4
 			}
 		}
 
+		#endregion
 
 
-
-
-
-
-
-		private RelayCommand<object> _selectCommand;
-		public RelayCommand<object> SelectCommand
+		#region Constructor
+		public PostDirectoryViewModel()
 		{
-			get
-			{
-				return _selectCommand
-					?? (_selectCommand = new RelayCommand<object>(
-						async() obj =>
-					{
+			dataService = new PostService();
+			this.IsBusy = false;
+			Posts = new ObservableCollection<Post>();
 
-					});
-					
-			}
+			//Initialize Commands
+			GetPostsAsyncCommand = new Command<string>(GetPostsAsync);
 
 		}
+		#endregion
 
 
+		#region Commands
 
+		public ICommand GetPostsAsyncCommand
+		{
+			get;
+			private set;
+		}
 
+		async void GetPostsAsync(string selectedPostType)
+		{
+			IsBusy = true;
+			Posts.Clear();
+			var posts = await dataService.GetPostsAsync(selectedPostType);
 
+			foreach (var post in posts)
+			{
+				Posts.Add(post);
+			}
+
+			IsBusy = false;
+		}
+
+		#endregion
 	}
-
-
-	//public RelayCommand RefreshCommand
-	//{
-	//	get
-	//	{
-	//		return _refreshCommand
-	//			?? (_refreshCommand = new RelayCommand(
-	//				async () =>
-	//				{
-	//					await Refresh();
-	//				}));
-	//	}
-	//}
-
-	//private async Task Refresh()
-	//{
-	//	IsBusy = true;
-
-	//	Posts.Clear();
-
-	//	var posts = await _dataService.Refresh();
-
-	//	foreach (var post in posts)
-	//	{
-	//		Posts.Add(post);
-	//	}
-
-	//	IsBusy = false;
-	//}
-
-	//public RelayCommand<string> GetSelectedPostsCommand
-	//{
-	//	get
-	//	{
-	//		return _getSelectedPostsCommand
-	//			?? (_getSelectedPostsCommand = new RelayCommand<string>(
-	//				async s =>
-	//				{
-
-	//					await GetSelectedPosts(s);
-
-	//				}));
-	//	}
-	//}
-
-	//async Task GetSelectedPosts(Sele)
-	//{
-	//	Posts.Clear();
-
-	//	var posts = await _dataService.GetPostsAsync(SelectedPostType);
-
-	//	foreach (var post in posts)
-	//	{
-	//		Posts.Add(post);
-	//	}
-	//}
-
 }
 
 
