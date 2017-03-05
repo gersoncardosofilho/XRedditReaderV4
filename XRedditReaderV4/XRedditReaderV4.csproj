@@ -35,6 +35,9 @@
     <EmbeddedResource Include="View\PostDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\MyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -55,6 +58,9 @@
     <Compile Include="Model\Service\PostService.cs" />
     <Compile Include="Model\Service\Constants.cs" />
     <Compile Include="Model\ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\MyPage.xaml.cs">
+      <DependentUpon>MyPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation">

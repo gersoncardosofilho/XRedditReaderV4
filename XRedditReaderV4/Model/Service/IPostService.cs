@@ -8,5 +8,7 @@ namespace XRedditReaderV4
 	public interface IPostService
 	{
  		Task<ObservableCollection<Post>> GetPostsAsync(string postType);
+
+		Task<ObservableCollection<Post>> GetPostsToDesign();
 	}
 }

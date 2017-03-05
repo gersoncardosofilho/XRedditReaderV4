@@ -1,5 +1,5 @@
 ﻿using System;
-namespace XRedditReaderV
+namespace XRedditReaderV4
 {
 	public class Constants
 	{

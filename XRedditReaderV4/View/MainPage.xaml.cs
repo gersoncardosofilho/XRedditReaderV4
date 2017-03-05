@@ -25,5 +25,7 @@ namespace XRedditReaderV4
 			Navigation.PushAsync(new PostDetailPage(selectedPost));
 			lvPosts.SelectedItem = null;
 		}
+
+
 	}
 }

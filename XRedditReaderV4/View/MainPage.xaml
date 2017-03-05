@@ -2,19 +2,65 @@
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	xmlns:view="clr-namespace:XRedditReaderV4.View;assembly=XRedditReaderV4" 
-	x:Class="XRedditReaderV4.MainPage">
+	x:Class="XRedditReaderV4.MainPage"
+	xmlns:view="clr-namespace:XRedditReaderV4.View;assembly=XRedditReaderV4">
 	
 	<ContentPage.Content>
 		<StackLayout>
 			<Picker ItemsSource = "{Binding PostTypes}" SelectedIndex = "{Binding PostTypeSelectedIndex}" />
-			<Label Text="{Binding SelectedPostType}"/>
 			<Button Text="Carrega Posts" Command = "{Binding GetPostsAsyncCommand}" CommandParameter = "{Binding SelectedPostType}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-			<ListView x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="70" Margin="10,10" >
+			<ListView HasUnevenRows="true" x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="120" Margin="10,10" >
 				<ListView.ItemTemplate>
 					<DataTemplate>
-						<ImageCell Text = "{Binding Title}" Detail="{Binding Subreddit}" ImageSource="{Binding Thumbnail}" />
+						<ViewCell>
+							<StackLayout Orientation="Vertical">
+								<RelativeLayout>
+									<Image 
+										x:Name="thumbnail"
+										Source="{Binding Thumbnail}" 
+										WidthRequest="100" 
+										HeightRequest="100" 
+										RelativeLayout.XConstraint="{ConstraintExpression 
+											Type=RelativeToParent, 
+											Property=Width, 
+											Factor=0,
+											Constant=0}" 
+									RelativeLayout.YConstraint="{ConstraintExpression 
+											Type=RelativeToParent,
+											Property=Height,
+											Factor=0,
+											Constant=0}" />
+
+									<Label x:Name="subRedditPrefix"
+											Text="{Binding Subreddit_name_prefixed}" 
+											TextColor="#dedede"
+											FontSize="14"
+											RelativeLayout.XConstraint="{ConstraintExpression
+												Type=RelativeToView,
+												ElementName=thumbnail,
+												Property=Width,
+												Factor=0,
+												Constant=120}"/>
+
+									<Label x:Name="tituloPost"
+											Text="{Binding Title}" 
+											TextColor="#b0b0b0"
+											RelativeLayout.YConstraint="{ConstraintExpression
+												Type=RelativeToView,
+												ElementName=subRedditPrefix,
+												Property=Width,
+												Factor=0,
+												Constant=20}"
+											RelativeLayout.XConstraint="{ConstraintExpression
+												Type=RelativeToView,
+												ElementName=thumbnail,
+												Property=Height,
+												Factor=0,
+												Constant=120}"/>
+								</RelativeLayout>
+							</StackLayout>
+						</ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>

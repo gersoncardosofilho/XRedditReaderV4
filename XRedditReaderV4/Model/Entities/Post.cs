@@ -9,6 +9,7 @@ namespace XRedditReaderV4
 		private string _url;
 		private string _title;
 		private string _subreddit;
+		private string _subreddit_name_prefixed;
 
 		public string Thumbnail
 		{
@@ -75,6 +76,23 @@ namespace XRedditReaderV4
 					return;
 				}
 				_subreddit = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public string Subreddit_name_prefixed
+		{
+			get
+			{
+				return _subreddit_name_prefixed;
+			}
+			set
+			{
+				if (_subreddit_name_prefixed == value)
+				{
+					return;
+				}
+				_subreddit_name_prefixed = value;
 				OnPropertyChanged();
 			}
 		}

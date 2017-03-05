@@ -96,6 +96,14 @@ namespace XRedditReaderV4
 
 			return postsResult;
 		}
+
+
 		#endregion
+
+
+		public Task<ObservableCollection<Post>> GetPostsToDesign()
+		{
+			throw new NotSupportedException();
+		}
 	}
 }

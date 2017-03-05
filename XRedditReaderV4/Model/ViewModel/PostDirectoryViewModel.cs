@@ -103,6 +103,10 @@ namespace XRedditReaderV4
 			GetPostsAsyncCommand = new Command<string>(GetPostsAsync);
 
 		}
+
+
+
+
 		#endregion
 
 

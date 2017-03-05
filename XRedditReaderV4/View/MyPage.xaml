@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XRedditReaderV4.MyPage">
+	<ContentPage.Content>
+		<StackLayout>
+			<RelativeLayout>
+				<BoxView 
+					x:Name="thumbnail"
+					Color="Green" 
+					WidthRequest="100" 
+					HeightRequest="100" 
+					RelativeLayout.XConstraint="{ConstraintExpression 
+						Type=RelativeToParent, 
+						Property=Width, 
+						Factor=0,
+						Constant=0}" 
+				RelativeLayout.YConstraint="{ConstraintExpression 
+						Type=RelativeToParent,
+						Property=Height,
+						Factor=0,
+						Constant=0}" />
+
+				<Label x:Name="subRedditPrefix"
+						Text="r/OldSchool" 
+						TextColor="#dedede"
+						FontSize="14"
+						RelativeLayout.XConstraint="{ConstraintExpression
+							Type=RelativeToView,
+							ElementName=thumbnail,
+							Property=Width,
+							Factor=0,
+							Constant=120}"/>
+
+				<Label x:Name="tituloPost"
+						Text="Titulo do Post" 
+						TextColor="#b0b0b0"
+						RelativeLayout.YConstraint="{ConstraintExpression
+							Type=RelativeToView,
+							ElementName=subRedditPrefix,
+							Property=Width,
+							Factor=0,
+							Constant=20}"
+						RelativeLayout.XConstraint="{ConstraintExpression
+							Type=RelativeToView,
+							ElementName=thumbnail,
+							Property=Height,
+							Factor=0,
+							Constant=120}"/>
+			</RelativeLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
