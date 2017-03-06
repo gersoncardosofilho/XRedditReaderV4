@@ -7,6 +7,7 @@ namespace XRedditReaderV4
 {
 	public partial class MainPage : ContentPage
 	{
+
 		public MainPage()
 		{
 			InitializeComponent();
@@ -25,6 +26,10 @@ namespace XRedditReaderV4
 			Navigation.PushAsync(new PostDetailPage(selectedPost));
 			lvPosts.SelectedItem = null;
 		}
+
+
+
+
 
 
 	}

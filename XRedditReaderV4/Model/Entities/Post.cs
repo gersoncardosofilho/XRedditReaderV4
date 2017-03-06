@@ -10,6 +10,7 @@ namespace XRedditReaderV4
 		private string _title;
 		private string _subreddit;
 		private string _subreddit_name_prefixed;
+		private string _media_embed;
 
 		public string Thumbnail
 		{
@@ -93,6 +94,23 @@ namespace XRedditReaderV4
 					return;
 				}
 				_subreddit_name_prefixed = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public string Media_embed
+		{
+			get
+			{
+				return _media_embed;
+			}
+			set
+			{
+				if (_media_embed == value)
+				{
+					return;
+				}
+				_media_embed = value;
 				OnPropertyChanged();
 			}
 		}
