@@ -3,6 +3,82 @@ using System.ComponentModel;
 
 namespace XRedditReaderV4
 {
+	public class Media_Embed:ViewModelBase
+	{
+		private string _content;
+		private int _width;
+		private bool _scrolling;
+		private int _height;
+
+		public string Content
+		{
+			get
+			{
+				return _content;
+			}
+			set
+			{
+				if (_content == value)
+				{
+					return;
+				}
+				_content = value;
+				OnIsBusyChanged();
+			}
+		}
+
+		public int Width
+		{
+			get
+			{
+				return _width;
+			}
+			set
+			{
+				if (_width == value)
+				{
+					return;
+				}
+				_width = value;
+				OnIsBusyChanged();
+			}
+		}
+
+		public bool Scrooling
+		{
+			get
+			{
+				return _scrolling;
+			}
+			set
+			{
+				if (_scrolling == value)
+				{
+					return;
+				}
+				_scrolling = value;
+				OnIsBusyChanged();
+			}
+		}
+
+		public int Height
+		{
+			get
+			{
+				return _height;
+			}
+			set
+			{
+				if (_height == value)
+				{
+					return;
+				}
+				_height = value;
+				OnIsBusyChanged();
+			}
+		}
+	}
+
 	public class Post : ViewModelBase
 	{
 		private string _thumbnail;
@@ -10,7 +86,7 @@ namespace XRedditReaderV4
 		private string _title;
 		private string _subreddit;
 		private string _subreddit_name_prefixed;
-		private string _media_embed;
+		private Media_Embed _media_embed;
 
 		public string Thumbnail
 		{
@@ -98,7 +174,7 @@ namespace XRedditReaderV4
 			}
 		}
 
-		public string Media_embed
+		public Media_Embed Media_embed
 		{
 			get
 			{

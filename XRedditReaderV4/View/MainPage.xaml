@@ -7,7 +7,7 @@
 	xmlns:view="clr-namespace:XRedditReaderV4.View;assembly=XRedditReaderV4">
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<DataTemplate x:Name="videoTemplate">
+			<DataTemplate x:Key="videoTemplate">
 				<ViewCell>
 					<StackLayout Orientation="Vertical">
 						<RelativeLayout>
@@ -18,7 +18,7 @@
 					</StackLayout>
 				</ViewCell>
 			</DataTemplate>
-			<DataTemplate x:Name="imageTemplate">
+			<DataTemplate x:Key="imageTemplate">
 				<ViewCell>
 					<StackLayout Orientation="Vertical">
 						<RelativeLayout>
