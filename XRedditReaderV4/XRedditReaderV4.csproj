@@ -38,6 +38,9 @@
     <EmbeddedResource Include="View\MyPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PostDetailWebview.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -62,6 +65,9 @@
       <DependentUpon>MyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\ListPostTemplateSelector.cs" />
+    <Compile Include="View\PostDetailWebview.xaml.cs">
+      <DependentUpon>PostDetailWebview.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation">

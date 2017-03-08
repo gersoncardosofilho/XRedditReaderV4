@@ -23,8 +23,17 @@ namespace XRedditReaderV4
 			{
 				return;
 			}
-			Navigation.PushAsync(new PostDetailPage(selectedPost));
-			lvPosts.SelectedItem = null;
+			if (selectedPost.Media_embed.Content != null)
+			{
+				Navigation.PushAsync(new PostDetailWebview(selectedPost));
+				lvPosts.SelectedItem = null;
+			}
+			else
+			{ 
+				Navigation.PushAsync(new PostDetailPage(selectedPost));
+				lvPosts.SelectedItem = null;
+			}
+
 		}
 
 
