@@ -28,7 +28,8 @@ namespace XRedditReaderV4
 			WebView webView = new WebView
 			{
 				Source = webSource,
-				VerticalOptions = LayoutOptions.FillAndExpand
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				HorizontalOptions = LayoutOptions.FillAndExpand
 			};
 
 			// Accomodate iPhone status bar.

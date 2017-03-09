@@ -99,10 +99,14 @@ namespace XRedditReaderV4
 			this.IsBusy = false;
 			Posts = new ObservableCollection<Post>();
 
+
 			//Initialize Commands
 			GetPostsAsyncCommand = new Command<string>(GetPostsAsync);
 
+			Task.Run(async () => await InitializeListView());
+
 		}
+
 
 
 
@@ -118,7 +122,7 @@ namespace XRedditReaderV4
 			private set;
 		}
 
-		async void GetPostsAsync(string selectedPostType)
+		public async void GetPostsAsync(string selectedPostType)
 		{
 			IsBusy = true;
 			Posts.Clear();
@@ -127,6 +131,22 @@ namespace XRedditReaderV4
 			foreach (var post in posts)
 			{
 				Posts.Add(post);
+			}
+
+			IsBusy = false;
+		}
+
+		//Initialize List View
+		public async Task InitializeListView()
+		{
+			IsBusy = true;
+			Posts.Clear();
+			var posts = await dataService.GetPostsAsync("New");
+
+			foreach (var post in posts)
+			{
+				Posts.Add(post);
+				OnPropertyChanged();
 			}
 
 			IsBusy = false;
