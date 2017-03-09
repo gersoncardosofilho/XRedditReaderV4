@@ -34,14 +34,14 @@
 	</ContentPage.Resources>
 	<ContentPage.Content>
 		<StackLayout>
-			<Picker ItemsSource="{Binding PostTypes}" SelectedIndex="{Binding PostTypeSelectedIndex}">
+			<Picker  ItemsSource="{Binding PostTypes}" SelectedIndex="{Binding PostTypeSelectedIndex}">
 				<Picker.Behaviors>
 					<local:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding GetPostsAsyncCommand}" />
 				</Picker.Behaviors>
 			</Picker>
 			<Button Text="Carrega Posts" Command="{Binding GetPostsAsyncCommand}" CommandParameter="{Binding SelectedPostType}" />
 			<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-			<ListView ItemTemplate="{StaticResource listPostTemplateSelector}" HasUnevenRows="true" x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="120" Margin="10,10">
+			<ListView  ItemTemplate="{StaticResource listPostTemplateSelector}" HasUnevenRows="true" x:Name="lvPosts" ItemsSource="{Binding Posts}" SeparatorColor="Gray" RowHeight="120" Margin="10,10">
 			</ListView>
 		</StackLayout>
 	</ContentPage.Content>

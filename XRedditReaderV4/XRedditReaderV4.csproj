@@ -68,7 +68,7 @@
     <Compile Include="View\PostDetailWebview.xaml.cs">
       <DependentUpon>PostDetailWebview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behavior\PickerItemSelectedBehavior.cs" />
+    <Compile Include="Behavior\EventToCommandBehavior.cs" />
     <Compile Include="Behavior\BehaviorBase.cs" />
   </ItemGroup>
   <ItemGroup>
